@@ -17,14 +17,13 @@ public class Main {
         client.runClient();
     }
 
-    //starting client
     public void runClient() {
         Scanner reader = new Scanner(System.in);
         System.out.print("Enter name: ");
         name = reader.nextLine().toUpperCase();
 
         try {
-            Socket socket = new Socket(IP, PORT); // connecting to IP by PORT
+            Socket socket = new Socket(IP, PORT);
             System.out.println("Connected to " + socket);
 
             PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
@@ -40,7 +39,7 @@ public class Main {
                     printWriter.println(name + ":" + msg);
                     printWriter.flush();
                 } else {
-                    printWriter.println(name + " has left chat");
+                    printWriter.println(name + " has left the chat");
                     printWriter.flush();
                     printWriter.close();
 //                    reader.close();
@@ -48,8 +47,8 @@ public class Main {
                 }
             }
         } catch (IOException e) {
-//            System.out.println("Cant send msg");
-//            e.getMessage();
+            System.out.println("Cant send msg");
+            e.getMessage();
         }
         reader.close();
 
@@ -71,8 +70,8 @@ public class Main {
 
             } catch (Exception e) {
                 System.out.println("Connection closed");
-//                e.printStackTrace();
-//                System.out.println("the msg is: "+e.getMessage());
+                e.printStackTrace();
+                System.out.println("the msg is: "+e.getMessage());
             }
         }
     }
