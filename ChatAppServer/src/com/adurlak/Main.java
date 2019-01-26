@@ -19,15 +19,14 @@ public class Main {
         server.startChatApp();
     }
 
-    // start serwera
     public void startChatApp() {
         serverList = new ArrayList();
         try (ServerSocket serverSocket = new ServerSocket(5000)) {
             while (true) {
-                Socket socket = serverSocket.accept(); // akceptuje polaczenia przychodzace na porcie 5000
-                System.out.println("Starting chat: " + serverSocket); // wyswietli sie informacja o serwerze
+                Socket socket = serverSocket.accept();
+                System.out.println("Starting chat: " + serverSocket);
                 printWriter = new PrintWriter(socket.getOutputStream());
-                serverList.add(printWriter); // dodajemy kazdego klienta
+                serverList.add(printWriter);
                 Thread t = new Thread((new ServerClient(socket)));
                 t.start();
             }
@@ -38,7 +37,6 @@ public class Main {
         }
     }
 
-    //odczytujemy i rozsylamy dane od klientow
     class ServerClient implements Runnable {
 
         Socket socket;
